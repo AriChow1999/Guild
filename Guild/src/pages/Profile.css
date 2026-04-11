@@ -1,0 +1,250 @@
+/* --- FULL RESPONSIVE ARCHITECTURE --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.profile-fortress {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh; /* Dynamic height for mobile browsers */
+  background-color: #030303;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.tactical-grid {
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 0, 0, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 0, 0, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.profile-content-wrapper {
+  position: relative;
+  z-index: 10;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 5% 60px; /* Fluid horizontal padding */
+}
+
+/* --- THE CONTAINER --- */
+.profile-container {
+  width: 100%;
+  max-width: 1100px;
+  display: flex;
+  background: #080808;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.9);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+/* --- VISUAL IDENTITY (LEFT) --- */
+.profile-visual {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  padding: 40px;
+}
+
+.visual-image-wrapper {
+  position: absolute;
+  inset: 0;
+}
+.visual-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.4;
+}
+
+.visual-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, #000 5%, transparent 100%);
+}
+
+.visual-content {
+  position: relative;
+  z-index: 5;
+}
+
+.id-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 0, 0, 0.1);
+  color: #ff0000;
+  padding: 6px 12px;
+  font-family: "Syncopate", sans-serif;
+  font-size: 0.5rem;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+  border: 1px solid rgba(255, 0, 0, 0.2);
+}
+
+.visual-title {
+  font-family: "Syncopate", sans-serif;
+  font-size: clamp(1.4rem, 4vw, 2.5rem);
+  color: #fff;
+  line-height: 1.1;
+}
+
+.highlight {
+  color: #ff0000;
+}
+
+/* --- DATA TERMINAL (RIGHT) --- */
+.profile-terminal {
+  flex: 1.2;
+  padding: clamp(2rem, 5vw, 4rem);
+  background: #080808;
+  border-left: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.terminal-header h2 {
+  font-family: "Syncopate", sans-serif;
+  font-size: 1.2rem;
+  color: #fff;
+  letter-spacing: 1px;
+}
+
+.header-underline {
+  width: 40px;
+  height: 2px;
+  background: #ff0000;
+  margin: 15px 0 40px;
+}
+
+.terminal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.input-field {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.input-field label {
+  font-family: "Syncopate", sans-serif;
+  font-size: 0.55rem;
+  color: #555;
+  margin-bottom: 8px;
+  letter-spacing: 1.5px;
+}
+
+.input-field input,
+.input-field textarea {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #222;
+  padding: 10px 0;
+  color: #fff;
+  font-size: 16px; /* Best for mobile zoom avoidance */
+  transition: 0.3s;
+  width: 100%;
+}
+
+/* STYLING FOR LOCKED FIELDS */
+.input-field.locked input,
+.input-field.locked textarea {
+  color: #666;
+  border-bottom-color: transparent;
+  cursor: default;
+}
+
+.input-field.readonly input {
+  color: #ff0000;
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.input-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: #ff0000;
+  transition: 0.4s ease;
+}
+
+.input-field input:focus ~ .input-bar,
+.input-field textarea:focus ~ .input-bar {
+  width: 100%;
+}
+
+/* --- BUTTON LOGIC --- */
+.action-btn {
+  border: none;
+  padding: 18px;
+  font-family: "Syncopate", sans-serif;
+  font-size: 0.75rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+  transition: 0.3s ease;
+}
+
+.edit-mode {
+  background: transparent;
+  border: 1px solid #333;
+  color: #888;
+}
+
+.edit-mode:hover {
+  border-color: #ff0000;
+  color: #fff;
+}
+
+.save-mode {
+  background: #ff0000;
+  color: #fff;
+}
+
+.save-mode:hover {
+  background: #fff;
+  color: #000;
+}
+
+/* --- MEDIA QUERIES --- */
+@media (max-width: 900px) {
+  .profile-container {
+    flex-direction: column;
+  }
+  .profile-visual {
+    min-height: 200px;
+    padding: 30px;
+  }
+  .profile-terminal {
+    border-left: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-content-wrapper {
+    padding-top: 80px;
+  }
+  .profile-visual {
+    display: none;
+  }
+  .profile-terminal {
+    padding: 2rem 1.5rem;
+  }
+}

@@ -1,0 +1,221 @@
+/* ============================================================
+   FOOTER-FORTRESS: ELITE TACTICAL INTERFACE
+   ============================================================ */
+
+.footer-fortress {
+  width: 100%;
+  background-color: #030303;
+  padding-top: 100px;
+  position: relative;
+  border-top: 1px solid rgba(255, 255, 255, 0.03);
+  overflow: hidden;
+}
+
+.footer-scan-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #ff0000, transparent);
+  opacity: 0.4;
+}
+
+.footer-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 5% 80px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 100px;
+}
+
+/* --- DIAMOND BRAND IDENTITY (Matches Navbar) --- */
+.f-col-brand {
+  flex: 1;
+}
+
+.f-logo-wrap {
+  display: flex;
+  align-items: center;
+  gap: 25px; /* Added gap for the diamond rotation space */
+  text-decoration: none;
+  margin-bottom: 30px;
+}
+
+.f-spartan-crest {
+  position: relative;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid #ff0000;
+  transform: rotate(45deg); /* Creates Diamond Shape */
+  background: rgba(255, 0, 0, 0.05);
+}
+
+.f-lambda {
+  /* Counter-rotate text so it stays vertical */
+  transform: rotate(-45deg);
+  font-family: "Syncopate", sans-serif;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.2rem;
+  text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+}
+
+.f-logo-wrap:hover .f-spartan-crest {
+  background: #ff0000;
+  transform: rotate(45deg) scale(1.1);
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
+}
+
+.f-logo-wrap:hover .f-lambda {
+  color: #ffffff;
+  text-shadow: none;
+}
+
+.f-main-title {
+  font-family: "Syncopate", sans-serif;
+  font-size: 1.6rem;
+  color: #fff;
+  letter-spacing: 8px;
+  line-height: 1;
+}
+
+.f-tagline {
+  font-size: 0.55rem;
+  color: #ff0000;
+  letter-spacing: 3px;
+  margin-top: 6px;
+  font-weight: 800;
+  display: block;
+}
+
+.f-summary {
+  color: #666;
+  font-size: 0.9rem;
+  max-width: 360px;
+  line-height: 1.8;
+  font-weight: 300;
+}
+
+/* --- NAVIGATION SECTION --- */
+.f-col-nav {
+  display: flex;
+  gap: 100px;
+  align-items: flex-start;
+}
+
+.f-nav-group {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  min-width: 180px;
+}
+
+.f-label {
+  font-family: "Syncopate", sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 4px;
+  color: #ffffff;
+}
+
+.f-social-links {
+  display: flex;
+  gap: 24px;
+}
+
+.f-icon-link {
+  color: #555;
+  transition: 0.3s;
+}
+
+.f-icon-link:hover {
+  color: #ff0000;
+  transform: translateY(-5px);
+}
+
+/* HOME LINK - NO JITTER */
+.f-root-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: "Syncopate", sans-serif;
+  font-size: 0.65rem;
+  color: #666;
+  text-decoration: none;
+  letter-spacing: 2px;
+  position: relative;
+  width: max-content;
+  transition: 0.3s;
+}
+
+.f-root-link::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0%;
+  height: 1px;
+  background: #ff0000;
+  transition: width 0.3s ease;
+}
+
+.f-root-link:hover {
+  color: #fff;
+  transform: translateX(5px);
+}
+
+.f-root-link:hover::after {
+  width: 100%;
+}
+
+/* --- BOTTOM STRIP --- */
+.f-bottom-strip {
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 40px 0;
+  background: rgba(0, 0, 0, 0.4);
+  margin-top: 20px;
+}
+
+.f-strip-inner {
+  display: flex;
+  justify-content: center; /* PERFECT CENTERING */
+  align-items: center;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.f-copyright {
+  font-family: "Syncopate", sans-serif;
+  font-size: 0.65rem;
+  color: #ffffff;
+  letter-spacing: 4px;
+  opacity: 0.8;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 60px;
+  }
+  .f-col-nav {
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+  }
+  .f-nav-group {
+    align-items: center;
+    min-width: unset;
+  }
+  .f-logo-wrap {
+    justify-content: center;
+  }
+}

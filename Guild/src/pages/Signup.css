@@ -1,0 +1,236 @@
+/* 1. RESET TO PREVENT OVERFLOW GAPS */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  overflow-x: hidden; /* Prevent horizontal "white space" scroll */
+  background-color: #030303;
+}
+
+/* --- THE FORTRESS WRAPPER --- */
+.signup-fortress {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh; /* Dynamic viewport height for mobile */
+  background-color: #030303;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* 2. BACKGROUND GRID THAT NEVER BREAKS */
+.tactical-grid {
+  position: fixed; /* Fixed so it covers the screen even when scrolling */
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 0, 0, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 0, 0, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.signup-content-wrapper {
+  position: relative;
+  z-index: 10;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 1rem 40px; /* Responsive side padding */
+}
+
+/* 3. FLEXIBLE CONTAINER */
+.signup-container {
+  width: 100%;
+  max-width: 1100px;
+  display: flex;
+  background: #080808;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+/* --- VISUAL PANEL --- */
+.signup-visual {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  padding: 40px;
+  background: #000;
+}
+
+.visual-image-wrapper {
+  position: absolute;
+  inset: 0;
+}
+.visual-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.5;
+}
+
+.visual-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, #000 0%, transparent 100%);
+}
+
+.visual-content {
+  position: relative;
+  z-index: 5;
+}
+.visual-title {
+  font-family: "Syncopate", sans-serif;
+  font-size: clamp(1.4rem, 4vw, 2.2rem);
+  color: #fff;
+  line-height: 1.2;
+}
+.highlight {
+  color: #ff0000;
+}
+
+/* --- TERMINAL FORM --- */
+.signup-terminal {
+  flex: 1;
+  padding: clamp(2rem, 5vw, 4rem);
+  background: #080808;
+  display: flex;
+  flex-direction: column;
+}
+
+.terminal-header h2 {
+  font-family: "Syncopate", sans-serif;
+  font-size: 1.5rem;
+  color: #fff;
+  letter-spacing: 2px;
+}
+
+.header-underline {
+  width: 30px;
+  height: 2px;
+  background: #ff0000;
+  margin: 10px 0 30px;
+}
+
+.terminal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.input-field {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.input-field label {
+  font-family: "Syncopate", sans-serif;
+  font-size: 0.55rem;
+  color: #666;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.input-field input,
+.input-field textarea {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #222;
+  padding: 12px 0;
+  color: #fff;
+  font-size: 16px; /* Prevents iOS auto-zoom */
+  width: 100%;
+}
+
+.input-field input:focus {
+  outline: none;
+}
+
+.input-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: #ff0000;
+  transition: 0.4s ease;
+}
+
+.input-field input:focus ~ .input-bar,
+.input-field textarea:focus ~ .input-bar {
+  width: 100%;
+}
+
+.deploy-button {
+  background: #ff0000;
+  color: #fff;
+  border: none;
+  padding: 1.2rem;
+  font-family: "Syncopate", sans-serif;
+  font-size: 0.75rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  transition: 0.3s;
+}
+
+.deploy-button:hover {
+  background: #fff;
+  color: #000;
+}
+
+.terminal-footer {
+  margin-top: 3rem;
+}
+.footer-label {
+  color: #444;
+  font-size: 0.6rem;
+  display: block;
+  margin-bottom: 8px;
+  font-family: "Syncopate", sans-serif;
+}
+.login-trigger {
+  color: #fff;
+  text-decoration: none;
+  font-family: "Syncopate", sans-serif;
+  font-size: 0.8rem;
+}
+
+/* --- RESPONSIVE BREAKPOINTS --- */
+
+@media (max-width: 900px) {
+  .signup-container {
+    flex-direction: column;
+  }
+  .signup-visual {
+    min-height: 200px;
+  }
+  .signup-content-wrapper {
+    padding-top: 80px;
+  }
+}
+
+@media (max-width: 480px) {
+  .signup-visual {
+    display: none;
+  } /* Focus on form for small phones */
+  .signup-terminal {
+    padding: 2rem 1.5rem;
+  }
+}

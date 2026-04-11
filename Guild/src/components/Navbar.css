@@ -1,0 +1,184 @@
+.nav-fortress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  background: rgba(3, 3, 3, 0.9); /* Slightly darker for better contrast */
+  backdrop-filter: blur(15px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Stealthier border */
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+}
+
+.nav-container {
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* --- Brand Styling --- */
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  text-decoration: none;
+}
+
+.helmet-frame {
+  width: 32px;
+  height: 32px;
+  border: 1px solid #ff0000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(45deg);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-brand:hover .helmet-frame {
+  background: #ff0000;
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
+}
+
+.lambda {
+  font-family: "Syncopate", sans-serif;
+  color: #fff;
+  font-size: 0.9rem;
+  transform: rotate(-45deg);
+}
+
+.brand-name {
+  font-family: "Syncopate", sans-serif;
+  letter-spacing: 6px;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+/* --- Menu & Links --- */
+.nav-menu {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  gap: 40px;
+}
+
+.nav-menu a {
+  position: relative;
+  font-family: "Syncopate", sans-serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #666; /* Dimmed state */
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 8px 12px;
+  transition: all 0.3s ease;
+}
+
+/* THE NEW HOVER EFFECT: Brackets and Glow */
+.nav-menu a::before,
+.nav-menu a::after {
+  content: "";
+  position: absolute;
+  width: 5px;
+  height: 100%;
+  top: 0;
+  border: 1px solid #ff0000;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.nav-menu a::before {
+  left: 0;
+  border-right: none;
+  transform: translateX(10px);
+}
+
+.nav-menu a::after {
+  right: 0;
+  border-left: none;
+  transform: translateX(-10px);
+}
+
+/* Hover state: Show brackets */
+.nav-menu a:hover {
+  color: #fff;
+}
+
+.nav-menu a:hover::before,
+.nav-menu a:hover::after {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ACTIVE LINK STYLE: No red underline. Instead, white glow and steady state */
+.nav-menu a.active-link {
+  color: #ff0000; /* Primary brand color for active */
+  text-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+}
+
+/* Remove the underline entirely */
+.nav-menu a.active-link::after,
+.nav-menu a.active-link::before {
+    display: none; 
+}
+
+/* --- Logout Button --- */
+.logout-btn {
+  background: transparent;
+  border: 1px solid #222;
+  color: #555;
+  padding: 10px 24px;
+  font-family: "Syncopate", sans-serif;
+  font-size: 0.6rem;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.logout-btn:hover {
+  border-color: #ff0000;
+  color: #fff;
+  background: rgba(255, 0, 0, 0.05);
+}
+
+/* --- Mobile Toggle (Hamburger) --- */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.line {
+  width: 20px;
+  height: 2px;
+  background: #fff;
+}
+
+@media (max-width: 950px) {
+  .nav-toggle { display: flex; }
+
+  .nav-menu {
+    position: fixed;
+    top: 80px;
+    right: -100%;
+    width: 100%;
+    height: calc(100vh - 80px);
+    background: #080808;
+    flex-direction: column;
+    padding-top: 50px;
+    gap: 30px;
+    transition: 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+  }
+
+  .nav-menu.menu-open { right: 0; }
+  
+  .nav-menu a { font-size: 1rem; }
+}
