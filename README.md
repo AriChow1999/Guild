@@ -29,11 +29,12 @@ To maintain peak performance and structural integrity, the following limitations
 
 ### Unit Permissions (Standard User)
 * **Transmission Control:** Users possess the authority to **Edit** and **Soft-Delete** their own messages.
-* **Restricted Access:** Users cannot modify or remove data sent by other units.
+* **Restricted Access:** Users cannot modify or remove data sent by other units, nor can they alter Guild/Channel structures.
 
 ### Administrative Authority (Guild Owner)
 The Admin possesses absolute control over the operational environment:
 
+* **Structural Control:** Exclusive authority to **Delete the Guild** or **Remove Channels**.
 * **Self-Management:** Full control to Edit, Soft-Delete, and **Hard-Delete** their own messages.
 * **Universal Moderation:** Administrative override allowing the **Soft-Deletion** and **Hard-Deletion** of any message sent by any unit within the Guild.
 * **Access Provisioning:** Authority to manually grant access to new units.
@@ -45,7 +46,7 @@ The Admin possesses absolute control over the operational environment:
 #### 1. Clone the repository
 
 ```bash
-git clone https://github.com/AriChow1999/Guild.git
+git clone [https://github.com/AriChow1999/Guild.git](https://github.com/AriChow1999/Guild.git)
 cd Guild
 2. Install dependencies
 Bash
