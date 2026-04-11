@@ -4,7 +4,7 @@ Guild is an elite, high-performance community management and messaging backend a
 ✨ Core Features
 Tactical UI: An industrial, glassmorphic interface built with custom CSS for high data density and clarity.
 
-Real-Time Intelligence: * Typing Indicators: Instant visual feedback showing specifically which units are active.
+Real-Time Intelligence: * Typing Indicators: Instant visual feedback showing specifically which units are active in the transmission field.
 
 Auto-Focus Messaging: The viewport automatically scrolls and locks to new incoming transmissions, ensuring zero missed data.
 
@@ -30,16 +30,24 @@ Guild Limit: Each Identity (User) is permitted to establish only one (1) Guild.
 
 Channel Capacity: Each Guild is restricted to a maximum of three (3) dedicated Channels.
 
-⚡ Administrative Authority (Admin Powers)
-The Guild Owner possesses absolute control over the operational environment:
+⚡ Permission Hierarchy & Authority
+Unit Permissions (Standard User)
+Transmission Control: Users possess the authority to Edit and Soft-Delete their own messages.
 
-Access Provisioning: Admin can manually grant access to new units (Users) within the Guild.
+Restricted Access: Users cannot modify or remove data sent by other units.
 
-Unit Exclusion (Kick/Ban): Ability to temporarily remove or permanently blacklist units from the environment.
+Administrative Authority (Guild Owner)
+The Admin possesses absolute control over the operational environment:
 
-Silence Protocol (Timeout): Initiate a 5-minute communication block on any unit, synchronized across Redis and the UI.
+Self-Management: Full control to Edit, Soft-Delete, and Hard-Delete their own messages.
 
-Data Purge: Exclusive permission to perform hard-deletes on database message records.
+Universal Moderation: Administrative override allowing the Soft-Deletion and Hard-Deletion of any message sent by any unit within the Guild.
+
+Access Provisioning: Authority to manually grant access to new units.
+
+Unit Exclusion (Kick/Ban): Ability to temporarily remove or permanently blacklist units.
+
+Silence Protocol (Timeout): Initiate a 5-minute communication block via Redis.
 
 📦 Getting Started
 1. Clone the repository
@@ -56,9 +64,15 @@ npm install
 cd guild
 npm install
 3. Run the Operation
-Bash
-# In backend directory
-npm run dev
+Open two terminal instances to run the services simultaneously:
 
-# In frontend directory
+Terminal 1 (Backend):
+
+Bash
+cd backend
+npm run dev
+Terminal 2 (Frontend):
+
+Bash
+cd guild
 npm run dev
