@@ -1,7 +1,7 @@
 import mongoose, { Schema, Document } from 'mongoose';
 
 export interface IMessage extends Document {
-    guild_id:string;
+    guild_id: string;
     channel_id: string;
     sender_id: string;
     sender_name: string;
@@ -12,7 +12,7 @@ export interface IMessage extends Document {
 }
 
 const MessageSchema = new Schema<IMessage>({
-    guild_id:{type:String,required:true,index:true},
+    guild_id: { type: String, required: true, index: true },
     channel_id: { type: String, required: true, index: true },
     sender_id: { type: String, required: true },
     sender_name: { type: String, required: true },

@@ -258,7 +258,7 @@ fastify.delete('/auth/guild/:id', async (request, reply) => {
 });
 
 
-// -----------------------------------CHANNeL---------------------------------------
+// -----------------------------------CHANNEL---------------------------------------
 // 1. SHOW ALL CHANNELS
 fastify.get('/auth/my-channels', async (request, reply) => {
     try {
