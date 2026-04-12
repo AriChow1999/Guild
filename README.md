@@ -24,8 +24,8 @@ To maintain peak performance and structural integrity, the following limitations
 
 * **Guild Limit:** Each Identity (User) is permitted to establish only **one (1) Guild**.
 * **Channel Capacity:** Each Guild is restricted to a maximum of **three (3) dedicated Channels**.
-* **Anti-Spam Protocols:** * **User Cap:** Each individual unit can send a maximum of **20 messages** total.
-    * **Channel Cap:** Each individual channel can hold a maximum of **100 messages**.
+* **Anti-Spam Rate-Limiting:** * **User Velocity Cap:** Each individual unit can transmit a maximum of **20 messages per minute**.
+    * **Channel Throughput Cap:** Each individual channel can process a maximum of **100 messages per minute**.
 
 ## ⚡ Permission Hierarchy & Authority
 
