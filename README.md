@@ -85,7 +85,7 @@ The Admin possesses absolute control over the operational environment:
 
 #### 1. System Dependency: Redis This operation requires a running Redis instance. If not installed:
 
-Download Redis-x64-3.0.504.msi from Microsoft Archive Redis Releases.
+Download Redis-x64-3.0.504.msi from Microsoft Archive Redis Releases <https://github.com/microsoftarchive/redis/releases>.
 
 #### 2. Clone the repository
 
