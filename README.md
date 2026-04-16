@@ -90,8 +90,7 @@ Download Redis-x64-3.0.504.msi from Microsoft Archive Redis Releases <https://gi
 #### 2. Clone the repository
 
 ```bash
-git clone [https://github.com/AriChow1999/Guild.git](https://github.com/AriChow1999/Guild.git)
-cd Guild
+git clone https://github.com/AriChow1999/Guild.git
 2. Install dependencies
 Bash
 # Install backend assets
