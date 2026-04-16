@@ -83,7 +83,11 @@ The Admin possesses absolute control over the operational environment:
 
 ## 📦 Getting Started
 
-#### 1. Clone the repository
+#### 1. System Dependency: Redis This operation requires a running Redis instance. If not installed:
+
+Download Redis-x64-3.0.504.msi from Microsoft Archive Redis Releases.
+
+#### 2. Clone the repository
 
 ```bash
 git clone [https://github.com/AriChow1999/Guild.git](https://github.com/AriChow1999/Guild.git)
