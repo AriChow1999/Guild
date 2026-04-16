@@ -91,25 +91,20 @@ Download Redis-x64-3.0.504.msi from Microsoft Archive Redis Releases <https://gi
 
 ```bash
 git clone https://github.com/AriChow1999/Guild.git
-2. Install dependencies
-Bash
-# Install backend assets
+
+# 2. Install dependencies
 cd backend
 npm install
 
-# Install frontend assets
 cd guild
 npm install
+
 3. Run the Operation
 Open two terminal instances to run the services simultaneously:
-
-Terminal 1 (Backend):
 
 Bash
 cd backend
 npm run dev
-Terminal 2 (Frontend):
 
-Bash
 cd guild
 npm run dev
