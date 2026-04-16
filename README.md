@@ -102,7 +102,6 @@ npm install
 3. Run the Operation
 Open two terminal instances to run the services simultaneously:
 
-Bash
 cd backend
 npm run dev
 
