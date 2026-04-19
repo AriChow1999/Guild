@@ -31,7 +31,7 @@ fastify.register(fastifyRedis, {
     host: process.env.REDIS_HOST || '127.0.0.1',
     port: Number(process.env.REDIS_PORT) || 6379,
     password: process.env.REDIS_PASSWORD || undefined,
-    closeClient: true
+    closeClient: false
 });
 
 fastify.ready((err) => {
@@ -666,7 +666,7 @@ fastify.post('/auth/guild/kick/:guild_id/:member_id', async (request, reply) => 
     }
 });
 
-// -----------------------------------------REDIS MANAGEMENT-------------------------------------------------
+// ----------------------------------------REDIS MANAGEMENT-------------------------------------------------
 // 1. START / HEARTBEAT
 fastify.post('/auth/channels/:channel_id/typing/start', async (request, reply) => {
     try {

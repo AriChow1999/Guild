@@ -263,10 +263,24 @@ const Dashboard: React.FC = () => {
     const timeoutMutation = useMutation({
         mutationFn: ({ memberId }: { memberId: string }) =>
             api.post(`/auth/guild/timeout/${activeGuildId}/${memberId}`),
-        onSuccess: () => {
+        onSuccess: (_, { memberId }) => {
             // Refresh the guild data so the 'timeout_until' timestamp flows into the UI
-            toast.success("USER TIMED OUT")
+            toast.success("USER TIMED OUT, ")
             queryClient.invalidateQueries({ queryKey: ['guilds'] });
+
+            setTimeout(async () => {
+                try {
+                    // 4. The Cleanup Call: Tell the backend to lift the timeout
+                    await api.delete(`/auth/guild/timeout/${activeGuildId}/${memberId}`);
+
+                    // 5. Final UI Sync: Re-enables the UI options for that member
+                    queryClient.invalidateQueries({ queryKey: ['guilds'] });
+
+                    console.log(`Timeout lifted for unit: ${memberId}`);
+                } catch (error) {
+                    console.error("Cleanup Protocol Failed:", error);
+                }
+            }, 300000);
         },
         onError: (err: AxiosError<BackendError>) => {
             toast.error(err.response?.data?.message || "TIMEOUT FAILED")

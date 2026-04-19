@@ -50,7 +50,7 @@ const Profile: React.FC = () => {
       setUser(updatedUser);
       toast.success("Profile Updated");
       setIsEditing(false);
-      setFormData(prev => ({ ...prev, password: '' })); // Clear local password
+      setFormData(prev => ({ ...prev, password: '' })); 
     },
     onError: (error: any) => {
       toast.error(error.response?.data?.message || "Update Failed");
@@ -85,7 +85,7 @@ const Profile: React.FC = () => {
     mutate(payload);
   };
 
-  if (!user) return <div className="loading-overlay">AUTHENTICATING...</div>;
+  if (!user) return <div className="loading-overlay">LOADING...</div>;
 
   return (
     <div className="profile-fortress">
