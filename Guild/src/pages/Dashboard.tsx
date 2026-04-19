@@ -270,15 +270,19 @@ const Dashboard: React.FC = () => {
 
             setTimeout(async () => {
                 try {
-                    // 4. The Cleanup Call: Tell the backend to lift the timeout
+    
                     await api.delete(`/auth/guild/timeout/${activeGuildId}/${memberId}`);
 
-                    // 5. Final UI Sync: Re-enables the UI options for that member
                     queryClient.invalidateQueries({ queryKey: ['guilds'] });
 
-                    console.log(`Timeout lifted for unit: ${memberId}`);
                 } catch (error) {
-                    console.error("Cleanup Protocol Failed:", error);
+                    // Step 1: Cast the error so you can access Axios properties
+                    const err = error as AxiosError<BackendError>;
+
+                    // Step 2: Now you can use it just like you did in onError
+                    const message = err.response?.data?.message || "CLEANUP_FAILED";
+
+                    toast.error(`Auto-restore failed: ${message}`);
                 }
             }, 300000);
         },
