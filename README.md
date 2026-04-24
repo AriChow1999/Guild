@@ -4,7 +4,7 @@
 
 ## ✨ Core Features
 
-* **Tactical UI:** An industrial, glassmorphic interface built with custom CSS for high data density and clarity.
+* **Tactical UI:** An industrial, glassmorphic interface built with custom CSS for high data density. Features a dual-protocol theme engine (Stealth Ops & Arctic Light) that synchronizes across all components via CSS variables and local storage persistence for a seamless environment transition.
 * **Real-Time Intelligence:** * **Typing Indicators:** Instant visual feedback showing specifically which units are active in the transmission field.
     * **Auto-Focus Messaging:** The viewport automatically scrolls and locks to new incoming transmissions, ensuring zero missed data.
 * **Redis-Powered Moderation:** Real-time "Timeout" protocols with automatic UI synchronization and binary status tracking.
