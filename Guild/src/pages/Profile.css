@@ -8,20 +8,21 @@
 .profile-fortress {
   width: 100%;
   min-height: 100vh;
-  min-height: 100dvh; /* Dynamic height for mobile browsers */
-  background-color: #030303;
+  min-height: 100dvh;
+  background-color: var(--s-bg);
   display: flex;
   flex-direction: column;
   position: relative;
   overflow-x: hidden;
+  transition: background-color 0.4s ease;
 }
 
 .tactical-grid {
   position: fixed;
   inset: 0;
   background-image:
-    linear-gradient(rgba(255, 0, 0, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 0, 0, 0.03) 1px, transparent 1px);
+    linear-gradient(var(--s-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--s-grid) 1px, transparent 1px);
   background-size: 40px 40px;
   z-index: 1;
   pointer-events: none;
@@ -34,7 +35,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 100px 5% 60px; /* Fluid horizontal padding */
+  padding: 100px 5% 60px;
 }
 
 /* --- THE CONTAINER --- */
@@ -42,11 +43,13 @@
   width: 100%;
   max-width: 1100px;
   display: flex;
-  background: #080808;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.9);
+  background: var(--s-panel);
+  border: 1px solid var(--s-border);
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.1);
   border-radius: 4px;
   overflow: hidden;
+  backdrop-filter: blur(var(--s-blur));
+  transition: all 0.4s ease;
 }
 
 /* --- VISUAL IDENTITY (LEFT) --- */
@@ -56,6 +59,7 @@
   display: flex;
   align-items: flex-end;
   padding: 40px;
+  background: #000; /* Maintains depth for the image panel */
 }
 
 .visual-image-wrapper {
@@ -72,7 +76,7 @@
 .visual-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, #000 5%, transparent 100%);
+  background: linear-gradient(to top, rgba(0,0,0,0.9) 5%, transparent 100%);
 }
 
 .visual-content {
@@ -84,14 +88,15 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  background: rgba(255, 0, 0, 0.1);
-  color: #ff0000;
+  background: rgba(var(--s-accent-rgb, 255, 0, 0), 0.1); /* Optional: uses accent for badge bg */
+  color: var(--s-accent);
   padding: 6px 12px;
   font-family: "Syncopate", sans-serif;
   font-size: 0.5rem;
   letter-spacing: 2px;
   margin-bottom: 20px;
-  border: 1px solid rgba(255, 0, 0, 0.2);
+  border: 1px solid var(--s-accent);
+  transition: all 0.3s ease;
 }
 
 .visual-title {
@@ -101,30 +106,33 @@
   line-height: 1.1;
 }
 
-.highlight {
-  color: #ff0000;
+/* Ensures "PROFILE" or name flips to blue even inside white titles */
+.visual-title .highlight {
+  color: var(--s-accent) !important;
+  transition: color 0.3s ease;
 }
 
 /* --- DATA TERMINAL (RIGHT) --- */
 .profile-terminal {
   flex: 1.2;
   padding: clamp(2rem, 5vw, 4rem);
-  background: #080808;
-  border-left: 1px solid rgba(255, 255, 255, 0.03);
+  background: transparent;
 }
 
 .terminal-header h2 {
   font-family: "Syncopate", sans-serif;
   font-size: 1.2rem;
-  color: #fff;
+  color: var(--s-text-main);
   letter-spacing: 1px;
+  transition: color 0.3s ease;
 }
 
 .header-underline {
   width: 40px;
   height: 2px;
-  background: #ff0000;
+  background: var(--s-accent);
   margin: 15px 0 40px;
+  transition: background-color 0.3s ease;
 }
 
 .terminal-form {
@@ -142,7 +150,7 @@
 .input-field label {
   font-family: "Syncopate", sans-serif;
   font-size: 0.55rem;
-  color: #555;
+  color: var(--s-text-dim);
   margin-bottom: 8px;
   letter-spacing: 1.5px;
 }
@@ -151,10 +159,10 @@
 .input-field textarea {
   background: transparent;
   border: none;
-  border-bottom: 1px solid #222;
+  border-bottom: 1px solid var(--s-input-line);
   padding: 10px 0;
-  color: #fff;
-  font-size: 16px; /* Best for mobile zoom avoidance */
+  color: var(--s-text-main);
+  font-size: 16px;
   transition: 0.3s;
   width: 100%;
 }
@@ -162,15 +170,14 @@
 /* STYLING FOR LOCKED FIELDS */
 .input-field.locked input,
 .input-field.locked textarea {
-  color: #666;
+  color: var(--s-text-dim);
   border-bottom-color: transparent;
-  cursor: default;
+  opacity: 0.7;
 }
 
 .input-field.readonly input {
-  color: #ff0000;
-  opacity: 0.5;
-  cursor: not-allowed;
+  color: var(--s-accent);
+  opacity: 0.6;
 }
 
 .input-bar {
@@ -179,7 +186,7 @@
   left: 0;
   width: 0%;
   height: 2px;
-  background: #ff0000;
+  background: var(--s-accent) !important;
   transition: 0.4s ease;
 }
 
@@ -204,23 +211,23 @@
 
 .edit-mode {
   background: transparent;
-  border: 1px solid #333;
-  color: #888;
+  border: 1px solid var(--s-border);
+  color: var(--s-text-dim);
 }
 
 .edit-mode:hover {
-  border-color: #ff0000;
-  color: #fff;
+  border-color: var(--s-accent);
+  color: var(--s-text-main);
 }
 
 .save-mode {
-  background: #ff0000;
+  background: var(--s-accent);
   color: #fff;
 }
 
 .save-mode:hover {
-  background: #fff;
-  color: #000;
+  background: var(--s-text-main);
+  color: var(--s-bg);
 }
 
 /* --- MEDIA QUERIES --- */
@@ -232,19 +239,13 @@
     min-height: 200px;
     padding: 30px;
   }
-  .profile-terminal {
-    border-left: none;
-  }
 }
 
 @media (max-width: 480px) {
-  .profile-content-wrapper {
-    padding-top: 80px;
-  }
   .profile-visual {
     display: none;
   }
   .profile-terminal {
-    padding: 2rem 1.5rem;
+    padding: 2.5rem 1.5rem;
   }
 }

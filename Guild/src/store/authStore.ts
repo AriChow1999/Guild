@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-
 import { create } from 'zustand';
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
@@ -10,13 +9,17 @@ interface User {
     email: string;
     bio?: string;
     is_banned?: boolean;
-    timeout_until?:boolean;
+    timeout_until?: boolean;
 }
 
 interface AuthState {
     user: User | null;
     token: string | null;
     isLoading: boolean;
+    // Theme State
+    isLight: boolean;
+    toggleTheme: () => void;
+    // Actions
     setAuth: (user: User, token: string) => void;
     setUser: (user: User) => void;
     logout: () => void;
@@ -29,6 +32,24 @@ export const useAuthStore = create<AuthState>((set, get) => ({
     token: localStorage.getItem('token'),
     isLoading: !!localStorage.getItem('token'),
 
+    // --- THEME INITIALIZATION ---
+    // Check localStorage first, otherwise default to Dark (false)
+    isLight: localStorage.getItem('theme') === 'light',
+
+    toggleTheme: () => {
+        const nextTheme = !get().isLight;
+        const themeString = nextTheme ? 'light' : 'dark';
+        
+        // 1. Update State
+        set({ isLight: nextTheme });
+        
+        // 2. Persist to LocalStorage
+        localStorage.setItem('theme', themeString);
+        
+        // 3. Update DOM Attribute immediately
+        document.documentElement.setAttribute('data-theme', themeString);
+    },
+
     setAuth: (user, token) => {
         localStorage.setItem('token', token);
         set({ user, token, isLoading: false });
@@ -40,18 +61,21 @@ export const useAuthStore = create<AuthState>((set, get) => ({
     logout: () => {
         localStorage.removeItem('token');
         set({ user: null, token: null, isLoading: false });
-        // Redirect to login or home after clearing state
         window.location.href = '/';
     },
 
     checkAuth: async () => {
         const { token } = get();
+        
+        // Ensure the DOM attribute matches the saved theme on load
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+
         if (!token) {
             set({ user: null, token: null, isLoading: false });
             return;
         }
         try {
-            // Pointing to your backend port 5000
             const res = await axios.get('http://localhost:5000/auth/me', {
                 headers: { Authorization: `Bearer ${token}` }
             });
@@ -74,7 +98,6 @@ export const useAuthStore = create<AuthState>((set, get) => ({
             if (timeLeft <= 0) {
                 get().logout();
             } else {
-                // Auto-logout when the token expires
                 setTimeout(() => {
                     get().logout();
                 }, timeLeft);

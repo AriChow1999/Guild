@@ -9,6 +9,12 @@
   box-sizing: border-box;
 }
 
+[data-theme='light'] {
+  --nav-bg: rgba(255, 255, 255, 0.4); /* Very transparent to show the blue/white background */
+  --nav-border: rgba(37, 99, 235, 0.1); /* Subtle blue tint border */
+  --text-main: #1e293b; /* Deep slate for readability */
+  --accent-color: #2563eb; /* Tactical Blue */
+}
 
 
 /* 2. Global Canvas */
@@ -44,7 +50,4 @@ a {
   background: #000;
 }
 
-::-webkit-scrollbar-thumb {
-  background: #ff0000; /* Spartan Red */
-  border-radius: 10px;
-}
+

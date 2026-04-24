@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/set-state-in-effect */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useEffect } from 'react';
-import { User, Mail, Lock, FileText, ChevronRight, ShieldCheck } from 'lucide-react';
+import { User, Mail, Lock, FileText, ChevronRight} from 'lucide-react';
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
@@ -105,10 +105,6 @@ const Profile: React.FC = () => {
             </div>
             <div className="visual-overlay"></div>
             <div className="visual-content">
-              <div className="id-badge">
-                <ShieldCheck size={14} color="#ff0000" />
-                <span>OPERATOR_VERIFIED</span>
-              </div>
               <h1 className="visual-title">OPERATOR <br /><span className="highlight">PROFILE.</span></h1>
             </div>
           </div>

@@ -19,6 +19,38 @@
   position: relative;
 }
 
+:root{
+  --guild-rail:#000;
+  --guild-hex:#0f0f0f;
+  --add-button:#111;
+  --guild-hex-text:#fff;
+  --operator-footer:#000;
+  --terminal-header:#000;
+  --channel-hover:rgba(255, 0, 0, 0.08);
+  --input-box:#0d0d0d;
+  --send-button:red;
+  --tactical-modal-bg:#0a0a0a;
+  --member-card-background:linear-gradient(90deg, #0d0d0d 0%, #080808 100%);
+}
+
+[data-theme='light']{
+  --guild-rail: linear-gradient(
+    180deg, 
+    rgba(255, 255, 255, 0.6) 0%, 
+    rgba(29, 78, 216, 0.5) 100%
+  ); 
+  --guild-hex:#a9b6ed;
+  --add-button:#a9b6ed;
+  --guild-hex-text:#0f172a;
+    --operator-footer:#223773;
+      --terminal-header:#929396;
+        --channel-hover:#4c5a80;
+          --input-box:#253974;
+          --send-button:var(--guild-rail);
+           --tactical-modal-bg:#caddf8;
+             --member-card-background:#c0d6f6;
+}
+
 .dash-fortress *,
 .dash-fortress *::before,
 .dash-fortress *::after {
@@ -50,7 +82,7 @@
 /* --- 1. GUILD RAIL --- */
 .dash-fortress .guild-rail {
   min-width: 72px;
-  background: #000;
+  background:var(--guild-rail);
   border-right: 1px solid var(--border-color);
   display: flex;
   flex-direction: column;
@@ -71,13 +103,13 @@
 .dash-fortress .helmet-frame {
   width: 42px;
   height: 42px;
-  border: 1.5px solid var(--primary-red);
+  border: 1.5px solid var(--accent);
   display: flex;
   align-items: center;
   justify-content: center;
   transform: rotate(45deg);
   margin-bottom: 25px;
-  box-shadow: 0 0 10px var(--shadow-red);
+  box-shadow: 0 0 10px var(--accent);
   flex-shrink: 0;
 }
 
@@ -85,14 +117,14 @@
   transform: rotate(-45deg);
   font-family: "Syncopate", sans-serif;
   font-weight: 900;
-  color: var(--primary-red);
+  color: var(--text-primary);
   font-size: 1.1rem;
 }
 
 .dash-fortress .guild-hex {
   width: 50px;
   min-height: 50px;
-  background: #0f0f0f;
+  background: var(--guild-hex);
   border: 1px solid #222;
   display: flex;
   align-items: center;
@@ -103,21 +135,21 @@
   font-size: 0.9rem;
   transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   margin-bottom: 12px;
-  color: #fff;
+  color: var(--guild-hex-text);
   flex-shrink: 0;
   clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
 }
 
 .dash-fortress .guild-hex:hover,
 .dash-fortress .guild-hex.active {
-  background: var(--primary-red);
+  background: var(--accent);
   box-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
 }
 
 .dash-fortress .add-guild-btn {
   width: 45px;
   height: 45px;
-  background: #111;
+  background: var(--add-button);
   border: 1px solid #222;
   color: #444;
   cursor: pointer;
@@ -130,14 +162,14 @@
 }
 
 .dash-fortress .add-guild-btn:hover {
-  color: var(--primary-red);
-  border-color: var(--primary-red);
+  color: var(--accent);
+  border-color: var(--accent);
 }
 
 /* --- 2. SIDEBAR --- */
 .dash-fortress .channel-sidebar {
   min-width: 260px;
-  background: var(--panel-bg);
+  background: var(--guild-rail);
   border-right: 1px solid var(--border-color);
   display: flex;
   flex-direction: column;
@@ -155,7 +187,7 @@
 .dash-fortress .guild-title {
   font-family: "Syncopate";
   font-size: 0.8rem;
-  color: #fff;
+  color: var(--text-primary);
   margin: 0;
   letter-spacing: 1px;
 }
@@ -166,6 +198,7 @@
 }
 
 .dash-fortress .manage-trigger,
+.dash-fortress .danger-trigger,
 .dash-fortress .decommission-trigger {
   color: #444;
   transition: 0.2s;
@@ -176,6 +209,10 @@
   color: #fff;
   transform: rotate(45deg);
 }
+.dash-fortress .danger-trigger:hover{
+  color: #fff;
+}
+
 .dash-fortress .decommission-trigger:hover {
   color: var(--primary-red);
 }
@@ -191,7 +228,7 @@
   align-items: center;
   font-family: "Syncopate";
   font-size: 0.65rem;
-  color: #444;
+  color: var(--text-primary);
   margin: 20px 15px 12px;
 }
 
@@ -208,7 +245,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 10px 18px;
-  color: #888;
+  color: var(--text-primary);
   cursor: pointer;
   transition: 0.2s;
 }
@@ -239,15 +276,14 @@
 
 .dash-fortress .channel-item.active {
   color: #fff;
-  background: rgba(255, 0, 0, 0.08);
-  border-left: 2px solid var(--primary-red);
+  background: var(--channel-hover);
 }
 
 /* --- 3. TERMINAL --- */
 .dash-fortress .chat-terminal {
   flex: 1;
   min-width: 450px;
-  background: var(--terminal-bg);
+  background: var(--guild-rail);
   display: flex;
   flex-direction: column;
   z-index: 10;
@@ -255,11 +291,12 @@
 
 .dash-fortress .terminal-header {
   padding: 18px 30px;
-  background: var(--panel-bg);
+  background: var(--terminal-header);
   border-bottom: 1px solid var(--border-color);
   display: flex;
   align-items: center;
   gap: 15px;
+  color:var(--text-primary);
   font-family: "Syncopate";
   font-size: 0.85rem;
 }
@@ -297,7 +334,7 @@
 }
 .dash-fortress .msg-top .user {
   font-family: "Syncopate";
-  color: var(--primary-red);
+  color: var(--text-primary);
   font-size: 0.7rem;
 }
 .dash-fortress .msg-top .time {
@@ -342,7 +379,7 @@
   padding: 0 30px 30px;
 }
 .dash-fortress .input-box {
-  background: #0d0d0d;
+  background: var(--input-box);
   border: 1px solid #1a1a1a;
   display: flex;
   align-items: center;
@@ -362,7 +399,7 @@
 .dash-fortress .send-btn {
   background: transparent;
   border: none;
-  color: var(--primary-red);
+  color: var(--send-button);
   cursor: pointer;
 }
 
@@ -383,9 +420,9 @@
 .dash-fortress .tactical-modal {
   width: 100%;
   max-width: 500px;
-  background: #0a0a0a;
-  border: 1px solid var(--primary-red);
-  box-shadow: 0 0 40px rgba(255, 0, 0, 0.2);
+  background:var(--tactical-modal-bg) ;
+  border: 1px solid var(--guild-hex);
+  box-shadow: 0 0 40px var(--guild-hex);
   animation: modalIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   flex-direction: column;
@@ -406,20 +443,20 @@
 
 .dash-fortress .modal-header {
   padding: 18px 20px;
-  background: #111;
+  background: var(--guild-rail);
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-family: "Syncopate";
   font-size: 0.7rem;
-  color: var(--primary-red);
+  color: var(--text-primary);
   border-bottom: 1px solid var(--border-color);
   flex-shrink: 0;
 }
 
 .dash-fortress .modal-tabs {
   display: flex;
-  background: #050505;
+  background: var(--tactical-modal-bg);
   border-bottom: 1px solid var(--border-color);
   overflow-x: auto;
   scrollbar-width: none;
@@ -444,9 +481,9 @@
 }
 
 .dash-fortress .modal-tabs button.active {
-  color: var(--primary-red);
-  background: rgba(255, 0, 0, 0.05);
-  box-shadow: inset 0 -2px 0 var(--primary-red);
+  color: var(--text-primary);
+  background: var(--guild-rail);
+  /* box-shadow: inset 0 -2px 0 var(--primary-red); */
 }
 
 .dash-fortress .modal-body {
@@ -534,7 +571,7 @@
 /* --- FOOTER --- */
 .dash-fortress .operator-footer {
   padding: 15px 20px;
-  background: #000;
+  background: var(--operator-footer);
   border-top: 1px solid var(--border-color);
   display: flex;
   align-items: center;
@@ -613,34 +650,32 @@
 
 /* The Date: Subtle and recessed */
 .dash-fortress .d-log {
-  color: var(--text-dim);
-  opacity: 0.5;
+  color: var(--text-primary);
+  opacity: 1;
   transition: opacity 0.3s ease;
 }
 
 /* The Time: Higher contrast with a slight "status" glow */
 .dash-fortress .t-log {
-  color: var(--primary-red);
+  color: var(--text-primary);
   font-weight: 700;
-  text-shadow: 0 0 4px rgba(255, 0, 0, 0.3);
 }
 
 /* Hover effect to bring the full timestamp into focus */
-.dash-fortress .msg-block:hover .d-log {
+.dash-fortress .msg-block:hover {
   opacity: 1;
-  color: #888;
+  color: var(--text-primary);
 }
 
 /* Optional: Subtle separator dash */
 .dash-fortress .d-log::after {
-  content: " //";
   margin-left: 4px;
   opacity: 0.3;
 }
 
 /* --- MEMBER CARD CONTAINER --- */
 .dash-fortress .member-card {
-    background: linear-gradient(90deg, #0d0d0d 0%, #080808 100%);
+    background: var(--member-card-background);
     border: 1px solid var(--border-color);
     border-left: 3px solid #333; /* Default neutral border */
     padding: 12px 16px;
@@ -649,11 +684,12 @@
     align-items: center;
     margin-bottom: 10px;
     transition: all 0.2s ease;
+    color: var(--text-primary);
 }
 
 .dash-fortress .member-card:hover {
     border-color: #444;
-    background: #0f0f0f;
+    background: var(--guild-rail);
 }
 
 .dash-fortress .member-card.unit-offline {
@@ -700,9 +736,9 @@
 
 /* --- TACTICAL BUTTONS --- */
 .dash-fortress .op-button {
-    background: #000;
+    background: var(--guild-rail);
     border: 1px solid #222;
-    color: #666;
+    color: var(--text-primary);
     padding: 8px 14px;
     display: flex;
     align-items: center;
@@ -727,7 +763,7 @@
 .dash-fortress .op-button.timeout:hover { color: #ffa500; border-color: #ffa500; box-shadow: 0 0 10px rgba(255, 165, 0, 0.2); }
 .dash-fortress .op-button.ban:hover { color: var(--primary-red); border-color: var(--primary-red); box-shadow: 0 0 10px rgba(255, 0, 0, 0.2); }
 .dash-fortress .op-button.restore:hover { color: #00ffff; border-color: #00ffff; box-shadow: 0 0 10px rgba(0, 255, 255, 0.2); }
-.dash-fortress .op-button.kick:hover { color: #fff; background: var(--primary-red); border-color: var(--primary-red); }
+.dash-fortress .op-button.kick:hover { color: #fff;  border-color: var(--primary-red); }
 
 /* --- BADGES RE-APPLIED --- */
 .dash-fortress .status-cluster { display: flex; gap: 5px; }
@@ -743,10 +779,10 @@
 /* Tactical Input Styling */
 .dash-fortress .tactical-input {
   width: 100%;
-  background: #000 !important;
+  background:var(--tactical-modal-bg);
   border: 1px solid #222 !important;
   padding: 14px 18px;
-  color: #fff;
+  color: var(--text-primary);
   font-family: "Inter", sans-serif;
   font-size: 0.85rem;
   outline: none;
@@ -755,8 +791,8 @@
 }
 
 .dash-fortress .tactical-input:focus {
-  border-color: var(--primary-red) !important;
-  background: rgba(255, 0, 0, 0.03) !important;
+  border-color: var(--guild-hex);
+  background: var(--guild-rail);
   box-shadow: inset 0 0 12px rgba(255, 0, 0, 0.1);
 }
 
@@ -770,8 +806,8 @@
 /* Grant Permissions Button */
 .dash-fortress .grant-btn {
   width: 100%;
-  background: var(--primary-red);
-  color: #fff;
+  background: var(--guild-hex);
+  color: var(--text-primary);
   border: none;
   padding: 16px;
   font-family: "Syncopate", sans-serif;

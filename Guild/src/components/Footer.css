@@ -2,13 +2,47 @@
    FOOTER-FORTRESS: ELITE TACTICAL INTERFACE
    ============================================================ */
 
+:root {
+  /* Dark Mode Variables */
+  --f-bg: #030303;
+  --f-border: rgba(255, 255, 255, 0.05);
+  --f-strip: rgba(0, 0, 0, 0.4);
+  --f-scan: linear-gradient(90deg, transparent, #ff0000, transparent);
+  --f-accent: #ff0000;
+  --f-title: #ffffff;
+  --f-text: #666666;
+  --f-glass: transparent;
+  --f-blur: 0px;
+}
+
+[data-theme='light'] {
+  /* The Perfect Arctic Mixture: Frosted White & Sapphire Blue */
+  --f-bg: linear-gradient(
+    180deg, 
+    rgba(255, 255, 255, 0.9) 0%, 
+    rgba(29, 78, 216, 0.5) 100%
+  ); 
+  --f-border: rgba(255, 255, 255, 0.5);
+  --f-strip: rgba(255, 255, 255, 0.3);
+  --f-scan: linear-gradient(90deg, transparent, #1e40af, transparent);
+  --f-accent: #1e40af; /* Deep Arctic Blue */
+  --f-title: #0f172a; /* Deep Navy */
+  --f-text: #334155;  /* Slate Blue/Grey */
+  --f-blur: 30px;     /* Essential Glass Effect */
+}
+
 .footer-fortress {
   width: 100%;
-  background-color: #030303;
+  background: var(--f-bg);
   padding-top: 100px;
   position: relative;
-  border-top: 1px solid rgba(255, 255, 255, 0.03);
+  border-top: 1px solid var(--f-border);
   overflow: hidden;
+  
+  /* Glassmorphism Logic */
+  backdrop-filter: blur(var(--f-blur)) saturate(180%);
+  -webkit-backdrop-filter: blur(var(--f-blur)) saturate(180%);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .footer-scan-line {
@@ -17,7 +51,7 @@
   left: 0;
   width: 100%;
   height: 1px;
-  background: linear-gradient(90deg, transparent, #ff0000, transparent);
+  background: var(--f-scan);
   opacity: 0.4;
 }
 
@@ -31,7 +65,7 @@
   gap: 100px;
 }
 
-/* --- DIAMOND BRAND IDENTITY (Matches Navbar) --- */
+/* --- DIAMOND BRAND IDENTITY --- */
 .f-col-brand {
   flex: 1;
 }
@@ -39,7 +73,7 @@
 .f-logo-wrap {
   display: flex;
   align-items: center;
-  gap: 25px; /* Added gap for the diamond rotation space */
+  gap: 25px;
   text-decoration: none;
   margin-bottom: 30px;
 }
@@ -52,25 +86,24 @@
   align-items: center;
   justify-content: center;
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  border: 1px solid #ff0000;
-  transform: rotate(45deg); /* Creates Diamond Shape */
-  background: rgba(255, 0, 0, 0.05);
+  border: 1px solid var(--f-accent);
+  transform: rotate(45deg); 
+  background: rgba(var(--f-accent), 0.05);
 }
 
 .f-lambda {
-  /* Counter-rotate text so it stays vertical */
   transform: rotate(-45deg);
   font-family: "Syncopate", sans-serif;
-  color: #fff;
+  color: var(--f-title);
   font-weight: 700;
   font-size: 1.2rem;
-  text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+  text-shadow: 0 0 10px var(--f-accent);
 }
 
 .f-logo-wrap:hover .f-spartan-crest {
-  background: #ff0000;
+  background: var(--f-accent);
   transform: rotate(45deg) scale(1.1);
-  box-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
+  box-shadow: 0 0 20px var(--f-accent);
 }
 
 .f-logo-wrap:hover .f-lambda {
@@ -81,14 +114,14 @@
 .f-main-title {
   font-family: "Syncopate", sans-serif;
   font-size: 1.6rem;
-  color: #fff;
+  color: var(--f-title);
   letter-spacing: 8px;
   line-height: 1;
 }
 
 .f-tagline {
   font-size: 0.55rem;
-  color: #ff0000;
+  color: var(--f-accent);
   letter-spacing: 3px;
   margin-top: 6px;
   font-weight: 800;
@@ -96,7 +129,7 @@
 }
 
 .f-summary {
-  color: #666;
+  color: var(--f-text);
   font-size: 0.9rem;
   max-width: 360px;
   line-height: 1.8;
@@ -121,32 +154,26 @@
   font-family: "Syncopate", sans-serif;
   font-size: 0.65rem;
   letter-spacing: 4px;
-  color: #ffffff;
-}
-
-.f-social-links {
-  display: flex;
-  gap: 24px;
+  color: var(--f-title);
 }
 
 .f-icon-link {
-  color: #555;
+  color: var(--f-text);
   transition: 0.3s;
 }
 
 .f-icon-link:hover {
-  color: #ff0000;
+  color: var(--f-accent);
   transform: translateY(-5px);
 }
 
-/* HOME LINK - NO JITTER */
 .f-root-link {
   display: flex;
   align-items: center;
   gap: 10px;
   font-family: "Syncopate", sans-serif;
   font-size: 0.65rem;
-  color: #666;
+  color: var(--f-text);
   text-decoration: none;
   letter-spacing: 2px;
   position: relative;
@@ -161,12 +188,12 @@
   left: 0;
   width: 0%;
   height: 1px;
-  background: #ff0000;
+  background: var(--f-accent);
   transition: width 0.3s ease;
 }
 
 .f-root-link:hover {
-  color: #fff;
+  color: var(--f-title);
   transform: translateX(5px);
 }
 
@@ -176,15 +203,15 @@
 
 /* --- BOTTOM STRIP --- */
 .f-bottom-strip {
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-top: 1px solid var(--f-border);
   padding: 40px 0;
-  background: rgba(0, 0, 0, 0.4);
+  background: var(--f-strip);
   margin-top: 20px;
 }
 
 .f-strip-inner {
   display: flex;
-  justify-content: center; /* PERFECT CENTERING */
+  justify-content: center;
   align-items: center;
   max-width: 1400px;
   margin: 0 auto;
@@ -193,7 +220,7 @@
 .f-copyright {
   font-family: "Syncopate", sans-serif;
   font-size: 0.65rem;
-  color: #ffffff;
+  color: var(--f-title);
   letter-spacing: 4px;
   opacity: 0.8;
 }

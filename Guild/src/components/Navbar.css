@@ -1,15 +1,46 @@
+/* --- Global Theme Variables --- */
+:root {
+  /* Dark Mode (Stealth/Industrial) */
+  --nav-bg: rgba(3, 3, 3, 0.9);
+  --nav-border: rgba(255, 255, 255, 0.05);
+  --text-main: #ffffff;
+  --text-dim: #666666;
+  --accent: #ff0000;
+  --glass-blur: 15px;
+  --saturate: 100%;
+}
+
+[data-theme='light'] {
+  /* Light Mode (Deep Arctic Glassmorphism) */
+  --nav-bg: linear-gradient(
+    180deg, 
+    rgba(255, 255, 255, 0.6) 0%, 
+    rgba(29, 78, 216, 0.5) 100%
+  ); 
+  --nav-border: rgba(255, 255, 255, 0.4); 
+  --text-main: #0f172a; 
+  --text-dim: #334155;
+  --accent: #7181b9; 
+  --glass-blur: 30px; 
+  --saturate: 200%;
+}
+
+/* --- Navbar Base Layout --- */
 .nav-fortress {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 80px;
-  background: rgba(3, 3, 3, 0.9); /* Slightly darker for better contrast */
-  backdrop-filter: blur(15px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Stealthier border */
+  background: var(--nav-bg);
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--saturate)) contrast(110%);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--saturate)) contrast(110%);
+  border-bottom: 1px solid var(--nav-border);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
   z-index: 1000;
   display: flex;
   align-items: center;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .nav-container {
@@ -22,7 +53,7 @@
   align-items: center;
 }
 
-/* --- Brand Styling --- */
+/* --- Brand Section --- */
 .nav-brand {
   display: flex;
   align-items: center;
@@ -33,7 +64,7 @@
 .helmet-frame {
   width: 32px;
   height: 32px;
-  border: 1px solid #ff0000;
+  border: 1px solid var(--accent);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -42,26 +73,28 @@
 }
 
 .nav-brand:hover .helmet-frame {
-  background: #ff0000;
-  box-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
+  background: var(--accent);
+  box-shadow: 0 0 20px var(--accent);
 }
 
 .lambda {
   font-family: "Syncopate", sans-serif;
-  color: #fff;
+  color: var(--text-main);
   font-size: 0.9rem;
   transform: rotate(-45deg);
+  transition: color 0.3s ease;
 }
 
 .brand-name {
   font-family: "Syncopate", sans-serif;
   letter-spacing: 6px;
-  color: #fff;
+  color: var(--text-main);
   font-weight: 700;
   font-size: 1rem;
+  transition: color 0.3s ease;
 }
 
-/* --- Menu & Links --- */
+/* --- Navigation Menu --- */
 .nav-menu {
   display: flex;
   align-items: center;
@@ -75,22 +108,24 @@
   font-size: 0.65rem;
   font-weight: 700;
   letter-spacing: 2px;
-  color: #666; /* Dimmed state */
+  color: var(--text-dim);
   text-transform: uppercase;
   text-decoration: none;
   padding: 8px 12px;
   transition: all 0.3s ease;
 }
 
-/* THE NEW HOVER EFFECT: Brackets and Glow */
+/* Tactical Brackets Effect */
 .nav-menu a::before,
-.nav-menu a::after {
+.nav-menu a::after,
+.theme-toggle-btn::before,
+.theme-toggle-btn::after {
   content: "";
   position: absolute;
   width: 5px;
   height: 100%;
   top: 0;
-  border: 1px solid #ff0000;
+  border: 1px solid var(--accent);
   opacity: 0;
   transition: all 0.3s ease;
 }
@@ -107,9 +142,8 @@
   transform: translateX(-10px);
 }
 
-/* Hover state: Show brackets */
 .nav-menu a:hover {
-  color: #fff;
+  color: var(--text-main);
 }
 
 .nav-menu a:hover::before,
@@ -118,23 +152,68 @@
   transform: translateX(0);
 }
 
-/* ACTIVE LINK STYLE: No red underline. Instead, white glow and steady state */
 .nav-menu a.active-link {
-  color: #ff0000; /* Primary brand color for active */
-  text-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+  color: var(--accent);
+  text-shadow: 0 0 10px var(--accent);
 }
 
-/* Remove the underline entirely */
 .nav-menu a.active-link::after,
 .nav-menu a.active-link::before {
-    display: none; 
+  display: none; 
 }
+
+/* --- Theme Toggle Button --- */
+.nav-item {
+  display: flex;
+  align-items: center;
+  list-style: none;
+}
+
+.theme-toggle-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--nav-border);
+  color: var(--text-dim);
+  padding: 8px 16px;
+  font-family: "Syncopate", sans-serif;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  cursor: pointer;
+  position: relative;
+  text-transform: uppercase;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.theme-toggle-btn::before {
+  left: -5px;
+  border-right: none;
+  transform: translateX(5px);
+}
+
+.theme-toggle-btn::after {
+  right: -5px;
+  border-left: none;
+  transform: translateX(-5px);
+}
+
+.theme-toggle-btn:hover {
+  color: var(--text-main);
+  border-color: var(--accent);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme='light'] .theme-toggle-btn {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+
 
 /* --- Logout Button --- */
 .logout-btn {
   background: transparent;
-  border: 1px solid #222;
-  color: #555;
+  border: 1px solid var(--nav-border);
+  color: var(--text-dim);
   padding: 10px 24px;
   font-family: "Syncopate", sans-serif;
   font-size: 0.6rem;
@@ -144,22 +223,24 @@
 }
 
 .logout-btn:hover {
-  border-color: #ff0000;
+  border-color: #ff4d4d;
   color: #fff;
-  background: rgba(255, 0, 0, 0.05);
+  background: rgba(255, 77, 77, 0.1);
 }
 
-/* --- Mobile Toggle (Hamburger) --- */
+/* --- Mobile Logic --- */
 .nav-toggle {
   display: none;
   flex-direction: column;
   gap: 5px;
+  cursor: pointer;
 }
 
 .line {
   width: 20px;
   height: 2px;
-  background: #fff;
+  background: var(--text-main);
+  transition: 0.3s;
 }
 
 @media (max-width: 950px) {
@@ -171,7 +252,8 @@
     right: -100%;
     width: 100%;
     height: calc(100vh - 80px);
-    background: #080808;
+    background: var(--nav-bg);
+    backdrop-filter: blur(var(--glass-blur));
     flex-direction: column;
     padding-top: 50px;
     gap: 30px;
@@ -179,6 +261,5 @@
   }
 
   .nav-menu.menu-open { right: 0; }
-  
   .nav-menu a { font-size: 1rem; }
 }
