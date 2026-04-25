@@ -1,18 +1,19 @@
 /* eslint-disable react-hooks/set-state-in-effect */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState, useEffect } from 'react';
-import { User, Mail, Lock, FileText, ChevronRight} from 'lucide-react';
+import { User, Mail, Lock, FileText, ChevronRight } from 'lucide-react';
 import { useMutation } from '@tanstack/react-query';
-import axios from 'axios';
+// import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useAuthStore } from '../store/authStore';
 import './Profile.css';
+import api from '../api/axiosConfig';
 
 const Profile: React.FC = () => {
   // 1. TACTICAL SELECTORS
   const user = useAuthStore((state) => state.user);
-  const token = useAuthStore((state) => state.token);
+  // const token = useAuthStore((state) => state.token);
   const setUser = useAuthStore((state) => state.setUser);
 
   const [isEditing, setIsEditing] = useState(false);
@@ -40,9 +41,7 @@ const Profile: React.FC = () => {
   // 4. UPDATE MUTATION
   const { mutate, isPending } = useMutation({
     mutationFn: async (payload: any) => {
-      const response = await axios.put('http://localhost:5000/auth/profile', payload, {
-        headers: { Authorization: `Bearer ${token}` }
-      });
+      const response = await api.put('http://localhost:5000/auth/profile', payload);
       return response.data;
     },
     onSuccess: (updatedUser) => {
@@ -50,7 +49,7 @@ const Profile: React.FC = () => {
       setUser(updatedUser);
       toast.success("Profile Updated");
       setIsEditing(false);
-      setFormData(prev => ({ ...prev, password: '' })); 
+      setFormData(prev => ({ ...prev, password: '' }));
     },
     onError: (error: any) => {
       toast.error(error.response?.data?.message || "Update Failed");
