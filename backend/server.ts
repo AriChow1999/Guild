@@ -92,7 +92,7 @@ fastify.post('/auth/login', async (request, reply) => {
         // Fastify JWT signing
         const token = fastify.jwt.sign(
             { id: user._id, name: user.username },
-            { expiresIn: '7d' }
+            { expiresIn: process.env.JWT_EXPIRES_IN }
         );
 
         return {
